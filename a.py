@@ -285,8 +285,8 @@ async def monitor_groups(client, message: Message):
             logger.error(f"Error Details: {str(e)}")
 
 # Start the bot
-async def main():
-    await app.start()
-    await app.Client()
+#async def main():
+   # await app.start()
+    #await app.Client()
 
 app.run(main())

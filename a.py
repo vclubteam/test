@@ -287,6 +287,6 @@ async def monitor_groups(client, message: Message):
 # Start the bot
 async def main():
     await app.start()
-    await app.idle()
+    await app.Client()
 
 app.run(main())

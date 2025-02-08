@@ -51,7 +51,7 @@ async def get_bin_info(bin_number):
             return "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"
 
 # Function to check card details
-   async def check_card(card_info, charge_amount):
+async def check_card(card_info, charge_amount):
     card = card_info.strip()
     if not card:
         return "❌ **Invalid card details**", "Invalid card details provided."
@@ -224,7 +224,7 @@ async def get_bin_info(bin_number):
         f"𝗧𝗶𝗺𝗲 ⇾ {elapsed_time:.2f} **Seconds**\n"
     )
 
-    return status, result_message     
+    return status, result_message
 
 # Command to check card details
 @app.on_message(filters.command("chk") & filters.private)

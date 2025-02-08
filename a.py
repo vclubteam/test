@@ -12,7 +12,7 @@ from pyrogram.types import Message
 API_ID = 24509589  # Your API ID
 API_HASH = "717cf21d94c4934bcbe1eaa1ad86ae75"  # Your API Hash
 BOT_TOKEN = "7557391528:AAEx0LyZGEDr2JoBEka6FrT7cPqAKSFU0IU"  # Your Bot Token
-SK_KEY = "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"  # Your Stripe Secret Key
+SK_KEY = "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"  # Your Stripe Secret Key
 TARGET_CHAT_ID = -1002342891787  # Replace with the correct target group chat ID
 OWNER_ID = 7716352578  # Replace with your Telegram user ID
 
@@ -285,8 +285,4 @@ async def monitor_groups(client, message: Message):
             logger.error(f"Error Details: {str(e)}")
 
 # Start the bot
-#async def main():
-   # await app.start()
-    #await app.Client()
-
-app.run(main())
+app.run()

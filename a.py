@@ -51,15 +51,15 @@ async def get_bin_info(bin_number):
             return "N/A", "N/A", "N/A", "N/A", "N/A", "N/A"
 
 # Function to check card details
-async def check_card(card_info, charge_amount):
+   async def check_card(card_info, charge_amount):
     card = card_info.strip()
     if not card:
-        return "❌ **Invalid card details**"
+        return "❌ **Invalid card details**", "Invalid card details provided."
 
     # Extract card details using regex
     match = CARD_PATTERN.match(card)
     if not match:
-        return "❌ **Invalid card format. Please use: `card_number|mm|yy|cvv`**"
+        return "❌ **Invalid card format**", "Please use: `card_number|mm|yy|cvv`"
 
     cc, mes, ano, cvv = match.groups()
 
@@ -94,15 +94,15 @@ async def check_card(card_info, charge_amount):
                             if attempt < MAX_RETRIES - 1:
                                 await asyncio.sleep(RETRY_DELAY)
                             else:
-                                return f"❌ **Token creation failed**: {error_message}"
+                                return "❌ **Token creation failed**", error_message
                         else:
-                            return f"❌ **Token creation failed**: {error_message}"
+                            return "❌ **Token creation failed**", error_message
         except aiohttp.ClientError as e:
             logger.error(f"Network error: {e}")
-            return f"❌ **Network error**: {str(e)}"
+            return "❌ **Network error**", str(e)
 
     if not token_id:
-        return "❌ **Token creation failed**: No token ID received"
+        return "❌ **Token creation failed**", "No token ID received"
 
     charge_data = {
         "amount": int(charge_amount) * 100,
@@ -125,7 +125,7 @@ async def check_card(card_info, charge_amount):
                 charges = await response.text()
     except aiohttp.ClientError as e:
         logger.error(f"Charge error: {e}")
-        return f"❌ **Charge error**: {str(e)}"
+        return "❌ **Charge error**", str(e)
 
     try:
         charges_dict = json.loads(charges)
@@ -224,7 +224,7 @@ async def check_card(card_info, charge_amount):
         f"𝗧𝗶𝗺𝗲 ⇾ {elapsed_time:.2f} **Seconds**\n"
     )
 
-    return status, result_message
+    return status, result_message     
 
 # Command to check card details
 @app.on_message(filters.command("chk") & filters.private)
